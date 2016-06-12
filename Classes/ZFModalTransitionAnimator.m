@@ -544,7 +544,7 @@
     
     if(self.scrollview.contentOffset.y > -self.scrollview.contentInset.top
        || nowPoint.y < prevPoint.y
-       || fabs(velocity.x) < fabs(velocity.y))
+       || fabs(velocity.x) > fabs(velocity.y))
     {
         self.state = UIGestureRecognizerStateFailed;
         self.isFail = @YES;
