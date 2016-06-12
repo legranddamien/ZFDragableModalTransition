@@ -17,6 +17,7 @@ typedef NS_ENUM(NSUInteger, ZFModalTransitonDirection) {
 
 @interface ZFDetectScrollViewEndGestureRecognizer : UIPanGestureRecognizer
 @property (nonatomic, weak) UIScrollView *scrollview;
+@property (nonatomic, weak) UIViewController *modalController;
 @end
 
 @interface ZFModalTransitionAnimator : UIPercentDrivenInteractiveTransition <UIViewControllerAnimatedTransitioning, UIViewControllerTransitioningDelegate, UIGestureRecognizerDelegate>
