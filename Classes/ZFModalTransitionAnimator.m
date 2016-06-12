@@ -53,6 +53,7 @@
         [self removeGestureRecognizerFromModalController];
         self.gesture = [[ZFDetectScrollViewEndGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
         self.gesture.delegate = self;
+        self.gesture.modalController = self.modalController;
         [self.modalController.view addGestureRecognizer:self.gesture];
     } else {
         [self removeGestureRecognizerFromModalController];
@@ -510,6 +511,7 @@
 // Gesture Class Implement
 @interface ZFDetectScrollViewEndGestureRecognizer ()
 @property (nonatomic, strong) NSNumber *isFail;
+@property (nonatomic, weak) UIViewController *modalController;
 @end
 
 @implementation ZFDetectScrollViewEndGestureRecognizer
@@ -542,7 +544,8 @@
         return;
     }
     
-    if(self.scrollview.contentOffset.y > -self.scrollview.contentInset.top
+    if(([self.modalController isKindOf:[UINavigationController class]] && ((UINavigationController *)self.modalController).viewControllers.count > 1)
+       || self.scrollview.contentOffset.y > -self.scrollview.contentInset.top
        || nowPoint.y <= prevPoint.y
        || fabs(velocity.x) > fabs(velocity.y))
     {
